@@ -1,0 +1,196 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Distributed Systems with NServiceBus</title>
+    <meta name="description" content="A quick-start on the relative merits of 'monolith' apps vs distributed apps.">
+    <meta name="author" content="Neil Barnwell">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/league.css" id="theme">
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="reveal">
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section>
+                <h1>Distributed Systems with NServiceBus</h1>
+                <h3>(from the trenches)</h3>
+                <p>
+                    <small>Created by <a href="http://neilbarnwell.co.uk">Neil Barnwell</a> / <a href="http://twitter.com/neilbarnwell">@neilbarnwell</a></small>
+                </p>
+            </section>
+            <section>
+                <h2>"Monolith" vs. "Distributed"</h2>
+                <p class="fragment">Or "One program" vs. "Many programs working together"</p>
+            </section>
+            <section>
+                <section>
+                    <h2>Monolith</h2>
+                    <p>
+                        Single application/stack containing all application code. E.g. ASP.NET web site + ORM + database.
+                    </p>
+                    <p>
+                        Though not necessarily large in <strong>size</strong> so not necessarily a Bad Thing if it's to <strong>stay</strong> small...
+                    </p>
+                </section>
+                <section data-background="#4d7e65">
+                    <h3>Pros</h3>
+                    <dl>
+                        <dt>Refactoring</dt>
+                        <dd>Good tool support</dd>
+                        <dt>Deployment</dt>
+                        <dd>Only one thing to deploy</dd>
+                        <dt>Cognitive overhead</dt>
+                        <dd>Less to keep in your head</dd>
+                        <dt>Simple</dt>
+                        <dd>Simple apps stay simple</dd>
+                    </dl>
+                </section>
+                <section data-background="#b5533c">
+                    <h3>Cons</h3>
+                    <dl>
+                        <dt>Scaling</dt>
+                        <dd>Scaling can be more expensive and/or inefficient, since the wrong thing may be scaled.</dd>
+                        <dt>Code quality issues</dt>
+                        <dd>Easy to end up with a "big ball of mud"</dd>
+                        <dt>High coupling</dt>
+                        <dd>Coupling within a single application is easier</dd>
+                    </dl>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h2>Distributed System</h2>
+                    <p>An application split into several components according to duty. E.g. ASP.NET web site + web services + Windows services.</p>
+                    <p>"Microservices" if you will...</p>
+                    <p>Messaging is used for communications between components</p>
+                </section>
+                <section data-background="#4d7e65">
+                    <h3>Pros</h3>
+                    <dl>
+                        <dt>Development easier</dt>
+                        <dd>Bitesize chunks makes estimation, planning and implementation easier</dd>
+                        <dt>Flexibility in technology choices</dt>
+                        <dd>Each component can be implemented in a suitable tech</dd>
+                        <dt>Scaling</dt>
+                        <dd>Individual services can be scaled, which is more accurate in the war against bottlenecks</dd>
+                        <dt>Autonomous components</dt>
+                        <dd>Services processing durable messages can be easily monitored and robust in failure</dd>
+                        <dt>Inter-system and intra-system integration</dt>
+                        <dd>Easier integration between <strong>different</strong> systems</dd>
+                        <dt>Could help avoid The Big Rewrite</dt>
+                        <dd>Gradually implement services/UI over time</dd>
+                    </dl>
+                </section>
+                <section data-background="#b5533c">
+                    <h3>Cons</h3>
+                    <dl>
+                        <dt>Refactoring</dt>
+                        <dd>More brainpower needed and better planning for version changes of contracts</dd>
+                        <dt>Deployment</dt>
+                        <dd>More moving parts, more components, means more deployment artefacts, scripts, queues and planning</dd>
+                        <dt>Scale-out needs to be baked-in</dt>
+                        <dd>Scaling-out individual components can influence system behaviour</dd>
+                        <dt>Eventual Consistency</dt>
+                        <dd>You're already doing it, deal with it :)</dd>
+                        <dt>Message idempotency and ordering</dt>
+                        <dd>These can be hard problems so solve, but chances are they're happing in your domain already</dd>
+                    </dl>
+                </section>
+            </section>
+
+            <section>
+                <h1>PLZ TO GIVE ME TEH CODEZ KTHXBAI</h1>
+            </section>
+
+
+            <section>
+                <section>
+                    <h1>Lessons Learned</h1>
+                    <p>In no particular order...</p>
+                </section>
+                <section>
+                    <h1>#1</h1>
+                    <p><strong>Be able to measure performance from the outset</strong></p>
+                    <blockquote>"This is crucial to ensure you know where you are failing your SLAs for message handling."</blockquote>
+                </section>
+                <section>
+                    <h1>#2</h1>
+                    <p><strong>Plan for scale-out early</strong></p>
+                    <blockquote>Finding a bottleneck in production is a problem when for some reason (e.g. message ordering) you don't have the <em>ability</em> to scale those components</blockquote>
+                </section>
+                <section>
+                    <h1>#3</h1>
+                    <p><strong>Distributed transactions are sloooow</strong></p>
+                    <blockquote>If you can support <q>at least once</q> messaging, then consider avoiding 2PC/DTC to gain potentially massive performance improvements</blockquote>
+                </section>
+                <section>
+                    <h1>#4</h1>
+                    <p><strong>Plan for handling out of order and duplicate messages</strong></p>
+                    <blockquote>Consider some sort of pull/merge/commit/push to accept messages coming in after the system has moved on, and avoid strict logic or anything that throws exceptions</blockquote>
+                </section>
+                <section>
+                    <h1>#5</h1>
+                    <p><strong>Consider hosting domain model in ESB service</strong></p>
+                    <blockquote>Scale-out could be useful, and allows for direct interaction between systems as well as all the built-in handler functionality and message failure tolerance/monitoring</blockquote>
+                </section>
+                <section>
+                    <h1>#6</h1>
+                    <p><strong>Build success/failure monitoring early</strong></p>
+                    <blockquote>Failed messages should be visible alongside log entries generated while processing them, and failures should notify someone who can correct issues and have the messages retried (consider <a href="http://particular.net/ServicePulse">ServicePulse</a></blockquote>
+                </section>
+            </section>
+
+            <section style="text-align: left;">
+                <h1>THE END</h1>
+                <p>
+                    <a href="https://github.com/nbarnwell/distributed-systems-with-nsb">Source code &amp; documentation</a>
+                </p>
+            </section>
+        </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/highlight/highlight.js', async: true, condition: function () { return !!document.querySelector('pre code'); }, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true },
+                { src: 'plugin/notes/notes.js', async: true }
+            ]
+        });
+
+    </script>
+</body>
+</html>
