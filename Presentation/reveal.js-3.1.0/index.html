@@ -49,6 +49,17 @@
                         Though not necessarily large in <strong>size</strong> so not necessarily a Bad Thing if it's to <strong>stay</strong> small...
                     </p>
                 </section>
+                <section data-background="#b5533c">
+                    <h3>Cons</h3>
+                    <dl>
+                        <dt>Scaling</dt>
+                        <dd>Scaling can be more expensive and/or inefficient, since the wrong thing may be scaled.</dd>
+                        <dt>Code quality issues</dt>
+                        <dd>Easy to end up with a "big ball of mud"</dd>
+                        <dt>High coupling</dt>
+                        <dd>Coupling within a single application is easier</dd>
+                    </dl>
+                </section>
                 <section data-background="#4d7e65">
                     <h3>Pros</h3>
                     <dl>
@@ -62,17 +73,6 @@
                         <dd>Simple apps stay simple</dd>
                     </dl>
                 </section>
-                <section data-background="#b5533c">
-                    <h3>Cons</h3>
-                    <dl>
-                        <dt>Scaling</dt>
-                        <dd>Scaling can be more expensive and/or inefficient, since the wrong thing may be scaled.</dd>
-                        <dt>Code quality issues</dt>
-                        <dd>Easy to end up with a "big ball of mud"</dd>
-                        <dt>High coupling</dt>
-                        <dd>Coupling within a single application is easier</dd>
-                    </dl>
-                </section>
             </section>
 
             <section>
@@ -81,6 +81,21 @@
                     <p>An application split into several components according to duty. E.g. ASP.NET web site + web services + Windows services.</p>
                     <p>"Microservices" if you will...</p>
                     <p>Messaging is used for communications between components</p>
+                </section>
+                <section data-background="#b5533c">
+                    <h3>Cons</h3>
+                    <dl>
+                        <dt>Refactoring</dt>
+                        <dd>More brainpower needed and better planning for version changes of contracts</dd>
+                        <dt>Deployment</dt>
+                        <dd>More moving parts, more components, means more deployment artefacts, scripts, queues and planning</dd>
+                        <dt>Scale-out needs to be baked-in</dt>
+                        <dd>Scaling-out individual components can influence system behaviour</dd>
+                        <dt>Eventual Consistency</dt>
+                        <dd>You're already doing it, deal with it :)</dd>
+                        <dt>Message idempotency and ordering</dt>
+                        <dd>These can be hard problems so solve, but chances are they're happing in your domain already</dd>
+                    </dl>
                 </section>
                 <section data-background="#4d7e65">
                     <h3>Pros</h3>
@@ -99,20 +114,20 @@
                         <dd>Gradually implement services/UI over time</dd>
                     </dl>
                 </section>
-                <section data-background="#b5533c">
-                    <h3>Cons</h3>
-                    <dl>
-                        <dt>Refactoring</dt>
-                        <dd>More brainpower needed and better planning for version changes of contracts</dd>
-                        <dt>Deployment</dt>
-                        <dd>More moving parts, more components, means more deployment artefacts, scripts, queues and planning</dd>
-                        <dt>Scale-out needs to be baked-in</dt>
-                        <dd>Scaling-out individual components can influence system behaviour</dd>
-                        <dt>Eventual Consistency</dt>
-                        <dd>You're already doing it, deal with it :)</dd>
-                        <dt>Message idempotency and ordering</dt>
-                        <dd>These can be hard problems so solve, but chances are they're happing in your domain already</dd>
-                    </dl>
+            </section>
+
+            <section>
+                <section>
+                    <h1>Introducing... NServiceBus</h1>
+                    <p>(What <em>is</em> it?)</p>
+                </section>
+                <section>
+                    <h2>In their words...</h2>
+                    <blockquote>"The most developer-friendly service bus for .NET."</blockquote>
+                </section>
+                <section>
+                    <h2>In other words...</h2>
+                    <p>A set of libraries to help build scalable apps that communicate using messages.</p>
                 </section>
             </section>
 
