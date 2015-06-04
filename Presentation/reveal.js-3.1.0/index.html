@@ -34,6 +34,7 @@
                 <p>
                     <small>Created by <a href="http://neilbarnwell.co.uk">Neil Barnwell</a> / <a href="http://twitter.com/neilbarnwell">@neilbarnwell</a></small>
                 </p>
+                <p>https://github.com/nbarnwell/distributed-systems-with-nsb</p>
             </section>
             <section>
                 <h2>"Monolith" vs. "Distributed"</h2>
@@ -129,12 +130,50 @@
                     <h2>In other words...</h2>
                     <p>A set of libraries to help build scalable apps that communicate using messages.</p>
                 </section>
+                <section>
+                    <p>There is no bus...</p>
+                    <p class="fragment">Well, no central "service bus" application to talk to; your apps have what they need built in.</p>
+                </section>
             </section>
 
             <section>
-                <h1>PLZ TO GIVE ME TEH CODEZ KTHXBAI</h1>
-            </section>
+                <section>
+                    <h1>EXAMPLE CODEZ</h1>
+                </section>
+                <section>
+                    <h1>#1</h1>
+                    <h2>Home-grown</h2>
+                </section>
+                <section>
+                    <h1>#1</h1>
+                    <h3>But what's missing?</h3>
+                    <ul>
+                        <li class="fragment">Actually, y'know <em>processing</em> the messages...</li>
+                        <li class="fragment">Exception/failed message handling</li>
+                        <li class="fragment">Timeouts</li>
+                        <li class="fragment">Sagas</li>
+                    </ul>
+                </section>
+                <section>
+                    <h1>#2</h1>
+                    <h2>NServiceBus style</h2>
+                </section>
+                <section>
+                    <h1>#2</h1>
+                    <h3>So what do we get?</h3>
+                    <ul>
+                        <li class="fragment">Actually, y'know <em>processing</em> the messages...</li>
+                        <li class="fragment">Exception/failed message handling</li>
+                        <li class="fragment">Timeouts</li>
+                        <li class="fragment">Sagas</li>
 
+                        <li class="fragment">Message mutators/behaviours</li>
+                        <li class="fragment">Handler ordering</li>
+                        <li class="fragment">Performance counters</li>
+                        <li class="fragment">...and more</li>
+                    </ul>
+                </section>
+            </section>
 
             <section>
                 <section>
@@ -169,8 +208,15 @@
                 <section>
                     <h1>#6</h1>
                     <p><strong>Build success/failure monitoring early</strong></p>
-                    <blockquote>Failed messages should be visible alongside log entries generated while processing them, and failures should notify someone who can correct issues and have the messages retried (consider <a href="http://particular.net/ServicePulse">ServicePulse</a></blockquote>
+                    <blockquote>Failed messages should be visible alongside log entries generated while processing them, and failures should notify someone who can correct issues and have the messages retried (consider <a href="http://particular.net/ServicePulse">ServicePulse</a>)</blockquote>
                 </section>
+            </section>
+
+            <section style="text-align: left;">
+                <h1>Questions?</h1>
+                <p>
+                    Tweet me if you prefer: <strong>@neilbarnwell</strong>
+                </p>
             </section>
 
             <section style="text-align: left;">
