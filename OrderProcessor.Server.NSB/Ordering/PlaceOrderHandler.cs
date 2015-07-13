@@ -10,7 +10,12 @@ namespace OrderProcessor.Server.NSB.Ordering
     {
         public void Handle(OrderPlaced message)
         {
+            throw new SpannerInTheWorksException();
             ColorConsole.WriteLine(ConsoleColor.Green, "Handling message: {0}", message.ToString());
         }
+    }
+
+    public class SpannerInTheWorksException : Exception
+    {
     }
 }

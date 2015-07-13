@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Messaging;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Transactions;
@@ -44,9 +45,8 @@ namespace OrderProcessor.Server.Custom
                     //    qTx.Begin();
 
                         var msg = current.Body;
-                        ColorConsole.WriteLine(ConsoleColor.Green, msg.ToString());
+                        ColorConsole.WriteLine(ConsoleColor.Green, "Received message {0} {{\r\n   {1}\r\n}}", msg.GetType(), msg.ToString());
 
-                        // Deserialise
                         // Find handlers for the message type
                         // Invoke the handler(s)
                         // Handle failure

@@ -28,13 +28,14 @@ namespace OrderProcessor.Client.Custom
             string input;
             while (!string.IsNullOrWhiteSpace(input = Console.ReadLine()))
             {
-                ColorConsole.WriteLine("Sending message to {0}...", targetQueuePath);
+                ColorConsole.Write("Sending message to {0}...", targetQueuePath);
                 targetQueue.Send(
                     new OrderPlaced
                     {
                         OrderId = Guid.NewGuid(),
                         CustomerReference = input
                     });
+                ColorConsole.WriteLine(" Sent.");
             }
         }
     }

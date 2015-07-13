@@ -28,7 +28,7 @@ namespace OrderProcessor.Server.NSB
             configuration.UsePersistence<InMemoryPersistence, StorageType.GatewayDeduplication>();
 
             configuration.Conventions()
-                         .DefiningMessagesAs(type => type.Assembly == typeof(OrderPlaced).Assembly);
+                         .DefiningEventsAs(type => typeof(OrderPlaced).Assembly == type.Assembly);
         }
     }
 }
